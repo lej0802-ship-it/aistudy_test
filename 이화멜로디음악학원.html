@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>이화멜로디음악학원</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #6B4FA0;
+      --primary-light: #9B79D0;
+      --primary-dark: #4A3570;
+      --accent: #E8A0BF;
+      --bg: #FAF8FF;
+      --text: #2D2D3A;
+      --text-muted: #7A7A8C;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(107,79,160,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #EDE7F6 0%, #FCE4EC 50%, #E8EAF6 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 5% 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '♩ ♪ ♫ ♬';
+      position: absolute;
+      top: 15%;
+      left: 5%;
+      font-size: 3rem;
+      color: rgba(107,79,160,0.08);
+      letter-spacing: 1rem;
+    }
+
+    .hero::after {
+      content: '♩ ♪ ♫ ♬';
+      position: absolute;
+      bottom: 15%;
+      right: 5%;
+      font-size: 3rem;
+      color: rgba(107,79,160,0.08);
+      letter-spacing: 1rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(107,79,160,0.1);
+      color: var(--primary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.2;
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(107,79,160,0.35);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(107,79,160,0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* STATS */
+    .stats {
+      background: var(--white);
+      padding: 3rem 5%;
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(107,79,160,0.08);
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-item .number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary);
+      display: block;
+    }
+
+    .stat-item .label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* SECTION COMMON */
+    section { padding: 80px 5%; }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: rgba(107,79,160,0.08);
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 20px;
+      letter-spacing: 1.5px;
+      margin-bottom: 1rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: -0.5px;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      margin-top: 0.8rem;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    /* CURRICULUM */
+    #curriculum { background: var(--bg); }
+
+    .curriculum-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .course-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid rgba(107,79,160,0.08);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .course-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .course-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(107,79,160,0.15);
+    }
+
+    .course-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .course-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .course-card .level {
+      display: inline-block;
+      background: rgba(107,79,160,0.08);
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .course-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .course-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .course-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .course-detail-item .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* SCHEDULE TABLE */
+    .schedule-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      overflow-x: auto;
+    }
+
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 20px rgba(107,79,160,0.08);
+    }
+
+    .schedule-table th {
+      background: var(--primary);
+      color: white;
+      padding: 14px 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .schedule-table td {
+      padding: 14px 20px;
+      font-size: 0.9rem;
+      color: var(--text);
+      border-bottom: 1px solid rgba(107,79,160,0.06);
+    }
+
+    .schedule-table tr:last-child td { border-bottom: none; }
+
+    .schedule-table tr:nth-child(even) td {
+      background: rgba(107,79,160,0.02);
+    }
+
+    /* MAP / CONTACT */
+    #contact { background: var(--white); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .contact-icon {
+      width: 42px;
+      height: 42px;
+      background: rgba(107,79,160,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .contact-item-text .label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .contact-item-text .value {
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .map-placeholder {
+      background: linear-gradient(135deg, #EDE7F6, #FCE4EC);
+      border-radius: 20px;
+      height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: var(--primary);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 2px dashed rgba(107,79,160,0.25);
+      transition: all 0.2s;
+    }
+
+    .map-placeholder:hover {
+      border-color: var(--primary);
+      box-shadow: 0 8px 30px rgba(107,79,160,0.15);
+    }
+
+    .map-placeholder .map-icon { font-size: 3rem; }
+
+    .map-placeholder .map-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      padding: 80px 5%;
+      text-align: center;
+      color: white;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      font-size: 1rem;
+      opacity: 0.8;
+      margin-bottom: 2rem;
+    }
+
+    .btn-white {
+      background: white;
+      color: var(--primary);
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--primary-dark);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 2rem 5%;
+      font-size: 0.85rem;
+    }
+
+    footer strong { color: white; }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .stats { gap: 2rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">이화멜로디<span>♪</span></div>
+  <ul class="nav-links">
+    <li><a href="#curriculum">수업 안내</a></li>
+    <li><a href="#schedule">시간표</a></li>
+    <li><a href="#contact">오시는 길</a></li>
+  </ul>
+  <a href="tel:010-0000-0000" class="btn-primary" style="padding: 10px 22px; font-size: 0.85rem;">📞 상담 문의</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-badge">🎵 이화멜로디음악학원</div>
+    <h1>음악으로 피어나는<br/><em>특별한 재능</em></h1>
+    <p>피아노부터 바이올린, 보컬까지 — 아이의 음악적 감성을 꽃피울 수 있는 전문 교육을 제공합니다.</p>
+    <div class="hero-btns">
+      <a href="#curriculum" class="btn-primary">수업 알아보기</a>
+      <a href="#contact" class="btn-outline">오시는 길</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item">
+    <span class="number">15+</span>
+    <span class="label">년 교육 경력</span>
+  </div>
+  <div class="stat-item">
+    <span class="number">500+</span>
+    <span class="label">졸업 수강생</span>
+  </div>
+  <div class="stat-item">
+    <span class="number">4가지</span>
+    <span class="label">전문 수업 과목</span>
+  </div>
+  <div class="stat-item">
+    <span class="number">1:1</span>
+    <span class="label">맞춤 개인 레슨</span>
+  </div>
+</div>
+
+<!-- CURRICULUM -->
+<section id="curriculum">
+  <div class="section-header">
+    <div class="section-tag">CURRICULUM</div>
+    <h2>수업 커리큘럼</h2>
+    <p>연령과 수준에 맞는 체계적인 음악 교육 프로그램을 제공합니다.</p>
+  </div>
+  <div class="curriculum-grid">
+
+    <div class="course-card">
+      <span class="course-icon">🎹</span>
+      <h3>피아노</h3>
+      <span class="level">입문 · 초급 · 중급 · 고급</span>
+      <p>바이엘부터 쇼팽까지 단계별 교재로 탄탄한 기초와 음악적 표현력을 키웁니다.</p>
+      <div class="course-details">
+        <div class="course-detail-item"><div class="dot"></div>대상: 5세 이상 전 연령</div>
+        <div class="course-detail-item"><div class="dot"></div>월 8회 (주 2회) / 월 4회 (주 1회)</div>
+        <div class="course-detail-item"><div class="dot"></div>개인 레슨 · 소그룹 레슨 가능</div>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <span class="course-icon">🎻</span>
+      <h3>바이올린</h3>
+      <span class="level">입문 · 초급 · 중급</span>
+      <p>스즈키 메소드와 국내 교재를 병행하여 올바른 자세와 보잉 기법을 익힙니다.</p>
+      <div class="course-details">
+        <div class="course-detail-item"><div class="dot"></div>대상: 6세 이상 전 연령</div>
+        <div class="course-detail-item"><div class="dot"></div>월 8회 (주 2회) / 월 4회 (주 1회)</div>
+        <div class="course-detail-item"><div class="dot"></div>악기 대여 서비스 운영</div>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <span class="course-icon">🎤</span>
+      <h3>보컬 / 성악</h3>
+      <span class="level">입문 · 중급</span>
+      <p>발성법, 호흡, 음정 훈련부터 장르별 보컬 테크닉까지 전문적으로 지도합니다.</p>
+      <div class="course-details">
+        <div class="course-detail-item"><div class="dot"></div>대상: 초등학생 이상</div>
+        <div class="course-detail-item"><div class="dot"></div>월 4회 또는 8회 선택</div>
+        <div class="course-detail-item"><div class="dot"></div>오디션 준비반 별도 운영</div>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <span class="course-icon">🎼</span>
+      <h3>음악 이론 / 소리 교육</h3>
+      <span class="level">전 연령</span>
+      <p>음악의 기초 이론, 청음, 리듬 훈련을 통해 모든 악기 학습의 기반을 다집니다.</p>
+      <div class="course-details">
+        <div class="course-detail-item"><div class="dot"></div>대상: 5세 이상 전 연령</div>
+        <div class="course-detail-item"><div class="dot"></div>월 4회 그룹 수업</div>
+        <div class="course-detail-item"><div class="dot"></div>다른 수업과 병행 추천</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule" style="background: #F3F0FA;">
+  <div class="section-header">
+    <div class="section-tag">SCHEDULE</div>
+    <h2>수업 시간표</h2>
+    <p>아래 시간표는 기본 운영 시간이며, 개인 레슨은 협의 후 조정 가능합니다.</p>
+  </div>
+  <div class="schedule-wrapper">
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>시간</th>
+          <th>월 · 수 · 금</th>
+          <th>화 · 목</th>
+          <th>토</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>14:00 – 15:00</td>
+          <td>피아노 (유아/초등 초급)</td>
+          <td>바이올린 (유아/초등)</td>
+          <td>음악 이론 그룹반</td>
+        </tr>
+        <tr>
+          <td>15:00 – 16:00</td>
+          <td>피아노 (초등 중급)</td>
+          <td>피아노 (초등 초급)</td>
+          <td>피아노 (중·고급)</td>
+        </tr>
+        <tr>
+          <td>16:00 – 17:00</td>
+          <td>보컬 (초등 이상)</td>
+          <td>바이올린 (중급)</td>
+          <td>보컬 · 성악</td>
+        </tr>
+        <tr>
+          <td>17:00 – 18:00</td>
+          <td>피아노 (중·고등)</td>
+          <td>피아노 (중·고등)</td>
+          <td>개인 레슨 (예약)</td>
+        </tr>
+        <tr>
+          <td>18:00 – 19:00</td>
+          <td>성인 피아노</td>
+          <td>성인 바이올린</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <div class="section-tag">CONTACT</div>
+    <h2>오시는 길 & 연락처</h2>
+    <p>언제든지 편하게 연락 주세요. 무료 체험 수업을 신청하실 수 있습니다.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>학원 정보</h3>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-item-text">
+            <div class="label">주소</div>
+            <div class="value">서울특별시 ○○구 ○○동 000-0<br/>○○빌딩 3층</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div class="contact-item-text">
+            <div class="label">전화</div>
+            <div class="value">010-0000-0000</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">💬</div>
+          <div class="contact-item-text">
+            <div class="label">카카오톡 상담</div>
+            <div class="value">카카오채널: 이화멜로디음악학원</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div class="contact-item-text">
+            <div class="label">운영 시간</div>
+            <div class="value">평일 14:00 – 19:00<br/>토요일 13:00 – 17:00<br/>일요일 · 공휴일 휴원</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🚇</div>
+          <div class="contact-item-text">
+            <div class="label">교통편</div>
+            <div class="value">○○역 2번 출구에서 도보 5분</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="map-placeholder" onclick="alert('지도 서비스를 연결하거나 카카오맵/네이버맵 링크를 삽입해 주세요.')">
+        <div class="map-icon">🗺️</div>
+        <div>지도 보기</div>
+        <div class="map-sub">카카오맵 또는 네이버맵으로 연결</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>무료 체험 수업 신청하기</h2>
+  <p>처음이라면 부담 없이 체험 수업부터 시작해 보세요 🎵</p>
+  <a href="tel:010-0000-0000" class="btn-white">지금 바로 문의하기</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>이화멜로디음악학원</strong> | 서울특별시 ○○구 ○○동 000-0 | 대표: ○○○</p>
+  <p style="margin-top: 6px;">Tel: 010-0000-0000 | © 2026 이화멜로디음악학원. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
